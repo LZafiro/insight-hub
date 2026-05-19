@@ -3,7 +3,7 @@
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -16,6 +16,8 @@ from app.services.embeddings import build_embedding_provider
 from app.services.ingestion import IngestionService
 from app.services.llm import build_llm_provider
 from app.services.rag import RAGService
+from app.services.reranker import CrossEncoderReranker, RerankProvider
+from app.services.retriever import HybridRetriever
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login", auto_error=False)
 
@@ -54,10 +56,20 @@ CurrentUser = Annotated[User, Depends(get_current_user)]
 # ---- Service factories ----
 
 
-def get_rag_service(db: DBSession) -> RAGService:
+def get_reranker(request: Request) -> RerankProvider:
+    return request.app.state.reranker  # type: ignore[no-any-return]
+
+
+def get_rag_service(
+    db: DBSession,
+    reranker: Annotated[RerankProvider, Depends(get_reranker)],
+) -> RAGService:
     return RAGService(
-        chunk_repo=ChunkRepository(db),
-        embeddings=build_embedding_provider(),
+        retriever=HybridRetriever(
+            chunk_repo=ChunkRepository(db),
+            embeddings=build_embedding_provider(),
+        ),
+        reranker=reranker,
         llm=build_llm_provider(),
     )
 

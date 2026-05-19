@@ -9,7 +9,9 @@
       "Bash(rtk grep *)",
       "Bash(rtk make *)",
       "Bash(rtk read *)",
-      "Bash(rtk find *)"
+      "Bash(rtk find *)",
+      "Bash(rtk docker *)",
+      "Bash(docker system *)"
     ]
   }
 }

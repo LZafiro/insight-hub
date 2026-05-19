@@ -13,6 +13,7 @@ from app import __version__
 from app.api.v1.router import api_router
 from app.core.config import settings
 from app.core.logging import configure_logging, get_logger
+from app.services.reranker import CrossEncoderReranker
 
 log = get_logger(__name__)
 
@@ -21,6 +22,8 @@ log = get_logger(__name__)
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     configure_logging()
     log.info("app.startup", env=settings.app_env, version=__version__)
+    app.state.reranker = CrossEncoderReranker()
+    app.state.reranker._load()
     yield
     log.info("app.shutdown")
 

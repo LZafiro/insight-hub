@@ -46,8 +46,8 @@ class Settings(BaseSettings):
     # ---- RAG ----
     chunk_size: int = 800
     chunk_overlap: int = 150
+    retrieval_candidate_k: int = 20
     retrieval_top_k: int = 5
-    retrieval_min_score: float = 0.3
 
     # ---- CORS ----
     cors_origins: str = "http://localhost:3000"

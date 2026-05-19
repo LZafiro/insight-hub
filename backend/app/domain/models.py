@@ -5,7 +5,10 @@ from enum import StrEnum
 from uuid import UUID, uuid4
 
 from pgvector.sqlalchemy import Vector
-from sqlalchemy import Enum as SAEnum, ForeignKey, Index, String, Text, func
+from typing import Any
+
+from sqlalchemy import Computed, Enum as SAEnum, ForeignKey, Index, String, Text, func
+from sqlalchemy.dialects.postgresql import TSVECTOR
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -96,6 +99,9 @@ class Chunk(Base, TimestampMixin):
     )
     ordinal: Mapped[int] = mapped_column(nullable=False)
     content: Mapped[str] = mapped_column(Text, nullable=False)
+    content_tsv: Mapped[Any] = mapped_column(
+        TSVECTOR, Computed("to_tsvector('english', content)", persisted=True)
+    )
     embedding: Mapped[list[float]] = mapped_column(
         Vector(settings.embedding_dimensions), nullable=False
     )
