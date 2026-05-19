@@ -1,0 +1,74 @@
+[
+  {
+    "id": "q001",
+    "query": "How did Aurora perform in Q3 2025?",
+    "relevant_documents": ["Aurora_Q3_2025_Review.txt"],
+    "reference_answer": "Aurora delivered total bookings of $14.2M in Q3 2025, a 27% increase versus Q3 2024. Net revenue retention held at 118%. Financial services grew 41% YoY to $5.8M and healthcare expanded 22% to $3.1M. Full-year revenue guidance was raised to $58-60M."
+  },
+  {
+    "id": "q002",
+    "query": "What was Aurora's net revenue retention in Q1 2025?",
+    "relevant_documents": ["Aurora_Q1_2025_Review.txt"],
+    "reference_answer": "Aurora's net revenue retention in Q1 2025 was 114%, slightly below the 116% target, as a small cohort of SMB customers churned during January renewals."
+  },
+  {
+    "id": "q003",
+    "query": "When did expansion ARR first exceed new logo ARR for Aurora?",
+    "relevant_documents": ["Aurora_Q2_2025_Review.txt"],
+    "reference_answer": "Expansion ARR surpassed new logo ARR for the first time in Q2 2025, signaling the maturation of Aurora's land-and-expand motion."
+  },
+  {
+    "id": "q004",
+    "query": "How did Aurora's total bookings grow from Q1 to Q3 2025?",
+    "relevant_documents": [
+      "Aurora_Q1_2025_Review.txt",
+      "Aurora_Q2_2025_Review.txt",
+      "Aurora_Q3_2025_Review.txt"
+    ],
+    "reference_answer": "Aurora's total bookings grew from $11.4M in Q1 2025 (+19% YoY) to $13.1M in Q2 2025 (+23% YoY) and $14.2M in Q3 2025 (+27% YoY), showing consistently accelerating growth throughout the year."
+  },
+  {
+    "id": "q005",
+    "query": "How did the financial services segment perform across all three quarters of 2025?",
+    "relevant_documents": [
+      "Aurora_Q1_2025_Review.txt",
+      "Aurora_Q2_2025_Review.txt",
+      "Aurora_Q3_2025_Review.txt"
+    ],
+    "reference_answer": "Financial services was Aurora's strongest segment: $4.2M in Q1 (+33% YoY), $5.1M in Q2 (+38% YoY), and $5.8M in Q3 (+41% YoY), with growth accelerating each quarter."
+  },
+  {
+    "id": "q006",
+    "query": "How did Aurora's full-year revenue guidance evolve through 2025?",
+    "relevant_documents": [
+      "Aurora_Q1_2025_Review.txt",
+      "Aurora_Q2_2025_Review.txt",
+      "Aurora_Q3_2025_Review.txt"
+    ],
+    "reference_answer": "Full-year guidance was maintained at $54-56M after Q1, raised to $56-58M after Q2, and raised again to $58-60M after Q3 2025."
+  },
+  {
+    "id": "q007",
+    "query": "What caused Aurora's gross margin contraction in Q1 2025?",
+    "relevant_documents": ["Aurora_Q1_2025_Review.txt"],
+    "reference_answer": "Gross margin contracted 1.8 percentage points to 71.2% in Q1 2025, driven by higher cloud infrastructure costs associated with the new embedding pipeline. A cost-reduction initiative was underway targeting 200 bps of improvement by Q3."
+  },
+  {
+    "id": "q008",
+    "query": "What were the main headwinds Aurora faced in Q3 2025?",
+    "relevant_documents": ["Aurora_Q3_2025_Review.txt"],
+    "reference_answer": "Aurora faced two main headwinds in Q3 2025: the strong dollar reduced reported European bookings by an estimated $0.6M, and sales cycles in mid-market enterprise lengthened from 47 to 63 days due to tightening procurement reviews."
+  },
+  {
+    "id": "q009",
+    "query": "What is Aurora's policy on employee remote work?",
+    "relevant_documents": [],
+    "reference_answer": null
+  },
+  {
+    "id": "q010",
+    "query": "Who are the board members of Aurora and what is their compensation?",
+    "relevant_documents": [],
+    "reference_answer": null
+  }
+]

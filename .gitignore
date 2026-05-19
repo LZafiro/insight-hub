@@ -51,3 +51,6 @@ logs/
 *.db
 *.sqlite
 uploads/
+
+# Eval results
+backend/eval/results/*.json

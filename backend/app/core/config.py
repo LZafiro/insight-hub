@@ -52,6 +52,11 @@ class Settings(BaseSettings):
     # ---- CORS ----
     cors_origins: str = "http://localhost:3000"
 
+    # ---- Eval ----
+    eval_judge_model: str = "gpt-4o"
+    eval_hit_rate_threshold: float = 0.7
+    eval_faithfulness_threshold: float = 3.5
+
     @computed_field  # type: ignore[prop-decorator]
     @property
     def cors_origins_list(self) -> list[str]:

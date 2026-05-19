@@ -1,6 +1,5 @@
 """Hybrid retrieval combining dense (pgvector) and sparse (BM25/FTS) search."""
 
-import asyncio
 from uuid import UUID
 
 from app.domain.models import Chunk
@@ -17,10 +16,8 @@ class HybridRetriever:
 
     async def retrieve(self, query: str, workspace_id: UUID, candidate_k: int = 20) -> list[Chunk]:
         query_vec = await self._embeddings.embed_one(query)
-        dense_results, bm25_results = await asyncio.gather(
-            self._chunks.search_dense(query_vec, workspace_id, top_n=candidate_k),
-            self._chunks.search_bm25(query, workspace_id, top_n=candidate_k),
-        )
+        dense_results = await self._chunks.search_dense(query_vec, workspace_id, top_n=candidate_k)
+        bm25_results = await self._chunks.search_bm25(query, workspace_id, top_n=candidate_k)
         return self._rrf_fuse(dense_results, bm25_results, top_k=candidate_k)
 
     @classmethod

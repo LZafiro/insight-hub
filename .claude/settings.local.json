@@ -11,7 +11,8 @@
       "Bash(rtk read *)",
       "Bash(rtk find *)",
       "Bash(rtk docker *)",
-      "Bash(docker system *)"
+      "Bash(docker system *)",
+      "Bash(docker compose *)"
     ]
   }
 }

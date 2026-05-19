@@ -1,4 +1,4 @@
-.PHONY: help up down logs migrate seed test lint format typecheck clean
+.PHONY: help up down logs migrate seed eval test lint format typecheck clean
 
 help:
 	@echo "Targets:"
@@ -7,6 +7,7 @@ help:
 	@echo "  logs       Tail backend logs"
 	@echo "  migrate    Apply database migrations"
 	@echo "  seed       Seed demo workspace, user, and document"
+	@echo "  eval       Run RAG evaluation pipeline"
 	@echo "  test       Run backend test suite with coverage"
 	@echo "  lint       Lint backend"
 	@echo "  format     Format backend code"
@@ -30,6 +31,9 @@ migrate:
 
 seed:
 	docker compose exec backend python -m scripts.seed_data
+
+eval:
+	docker compose exec backend python -m eval.runner
 
 test:
 	cd backend && uv run pytest --cov=app

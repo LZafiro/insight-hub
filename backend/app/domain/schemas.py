@@ -12,9 +12,6 @@ class ORMBase(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
-# ---- Auth ----
-
-
 class TokenPair(BaseModel):
     access_token: str
     refresh_token: str
@@ -26,9 +23,6 @@ class LoginRequest(BaseModel):
     password: str = Field(..., min_length=8, max_length=128)
 
 
-# ---- Users ----
-
-
 class UserOut(ORMBase):
     id: UUID
     email: EmailStr
@@ -36,9 +30,6 @@ class UserOut(ORMBase):
     role: UserRole
     workspace_id: UUID
     created_at: datetime
-
-
-# ---- Documents ----
 
 
 class DocumentOut(ORMBase):
@@ -54,9 +45,6 @@ class DocumentOut(ORMBase):
 class DocumentList(BaseModel):
     items: list[DocumentOut]
     total: int
-
-
-# ---- Chat ----
 
 
 class Citation(BaseModel):
@@ -85,9 +73,6 @@ class ConversationOut(ORMBase):
     title: str
     created_at: datetime
     messages: list[MessageOut] = []
-
-
-# ---- Health ----
 
 
 class HealthResponse(BaseModel):
