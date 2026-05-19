@@ -1,0 +1,120 @@
+### Insight Hub API
+### VS Code: instale a extensão "REST Client" (humao.rest-client)
+### JetBrains: suporte nativo em .http files
+
+@baseUrl = http://localhost:8000
+@email = admin@example.com
+@password = demo-password-1234
+
+# @name login
+
+
+# ──────────────────────────────────────────────
+# HEALTH
+# ──────────────────────────────────────────────
+
+### Health check
+GET {{baseUrl}}/api/v1/health
+
+
+# ──────────────────────────────────────────────
+# AUTH
+# ──────────────────────────────────────────────
+
+### Login — salva access_token e refresh_token nas variáveis abaixo
+# @name login
+POST {{baseUrl}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+###
+
+@accessToken = {{login.response.body.access_token}}
+@refreshToken = {{login.response.body.refresh_token}}
+
+### Refresh token
+POST {{baseUrl}}/api/v1/auth/refresh?refresh_token={{refreshToken}}
+
+
+# ──────────────────────────────────────────────
+# DOCUMENTS
+# ──────────────────────────────────────────────
+
+### Listar documentos
+GET {{baseUrl}}/api/v1/documents
+Authorization: Bearer {{accessToken}}
+
+### Listar documentos — com paginação
+GET {{baseUrl}}/api/v1/documents?limit=10&offset=0
+Authorization: Bearer {{accessToken}}
+
+### Upload de documento (texto)
+# Crie um arquivo sample.txt na mesma pasta para usar aqui
+POST {{baseUrl}}/api/v1/documents
+Authorization: Bearer {{accessToken}}
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="sample.txt"
+Content-Type: text/plain
+
+This is a sample document about quarterly performance.
+Aurora division achieved 12% growth in Q3 2025.
+The EMEA region led with 18% YoY increase in revenue.
+--boundary--
+
+### Upload de documento — tipo não suportado (deve retornar 415)
+POST {{baseUrl}}/api/v1/documents
+Authorization: Bearer {{accessToken}}
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="image.jpg"
+Content-Type: image/jpeg
+
+fake-binary-content
+--boundary--
+
+
+# ──────────────────────────────────────────────
+# CHAT
+# ──────────────────────────────────────────────
+
+### Pergunta sobre documento indexado
+POST {{baseUrl}}/api/v1/chat
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "message": "How did Aurora perform in Q3?"
+}
+
+### Pergunta sobre dado inexistente (deve responder sem citações)
+POST {{baseUrl}}/api/v1/chat
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "message": "What is the company's policy on remote work?"
+}
+
+### Mensagem vazia — deve retornar 422
+POST {{baseUrl}}/api/v1/chat
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "message": ""
+}
+
+### Sem token — deve retornar 401
+POST {{baseUrl}}/api/v1/chat
+Content-Type: application/json
+
+{
+  "message": "Who are the top clients?"
+}

@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rtk ls *)",
+      "Bash(rtk uv *)",
+      "Bash(rtk brew *)",
+      "Bash(/opt/homebrew/bin/uv sync *)",
+      "Bash(/opt/homebrew/bin/python3 *)",
+      "Bash(rtk grep *)",
+      "Bash(rtk make *)",
+      "Bash(rtk read *)",
+      "Bash(rtk find *)"
+    ]
+  }
+}
